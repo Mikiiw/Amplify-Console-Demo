@@ -1,9 +1,14 @@
 import React, { useState } from 'react';
 
 
-const SearchBar = () => {
+const SearchBar = ( {onFormSubmit}) => {
 
     const [searchTerm, setSearchTerm] = useState('');
+
+    const onSubmit = event => {
+        event.preventDefault();
+        onFormSubmit(searchTerm);
+    }
 
     return (
         <div className="search-bar ui segment">
@@ -12,7 +17,7 @@ const SearchBar = () => {
 
                     <label>Search Fields</label>
 
-                    <div class="ui grid">
+                    <div className="ui grid">
 
                         <div className="three wide column">
                             <select className="ui dropdown">
@@ -22,7 +27,7 @@ const SearchBar = () => {
                         </div>
 
                         <div className="three wide column">
-                        <select className="ui dropdown">
+                            <select className="ui dropdown">
                                 <option value="0">All</option>
                                 <option value="1">Firmware</option>
                                 <option value="2">Bat Cell Data</option>
@@ -36,12 +41,16 @@ const SearchBar = () => {
                             <input
                                 type="text"
                                 value={searchTerm}
+                                onChange={(event) => { setSearchTerm(event.target.value); }
+                                }
                             ></input>
                         </div>
 
                         <div className="two wide column">
-                            <button className="ui black basic button" >
-                                <i class="search icon"></i>
+                            <button  
+                            onClick={onSubmit}
+                            className="ui black basic button" >
+                                <i className="search icon"></i>
                             </button>
                         </div>
 
