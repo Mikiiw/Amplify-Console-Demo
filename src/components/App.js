@@ -10,14 +10,14 @@ const App = () => {
 
     //"https://stackoverflow.com/questions/43871637/no-access-control-allow-origin-header-is-present-on-the-requested-resource-whe/43881141#43881141"
     // proxy solution
-    const proxyurl = "https://cors-anywhere.herokuapp.com/";
+    const proxyurl = "https://stark-fortress-14740.herokuapp.com/";
 
     useState(async (username = "mickey wang", password = "123456") => {
-        const testaxios = axios.create({
-            baseURL: 'http://47.91.91.187/GivManage/api',
-            })
-        const url = `/login?account=${username}&password=${password}`; // site that doesn’t send Access-Control-*
-        const logininfo = await testaxios.post(url, 
+
+        const url = `http://47.91.91.187/GivManage/api/login?account=${username}&password=${password}`;
+        const logininfo = await axios.post(proxyurl + url, {
+            withCredentials: true
+          }
             );
         console.log("logged in");
         console.log(logininfo);
@@ -29,9 +29,9 @@ const App = () => {
     useEffect(() => {
         const searching = async () => {
             const url = `http://47.91.91.187/GivManage/api/inverter/getInverterInfo?serialNum=${search}`;
-            const inverterdata = await axios.post( url, {
-                
-            });
+            const inverterdata = await axios.post(proxyurl + url, {
+                withCredentials: true
+              });
             console.log("called inverter data");
             console.log(inverterdata);
         };
