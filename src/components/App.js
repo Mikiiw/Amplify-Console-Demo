@@ -8,24 +8,44 @@ import axios from 'axios';
 
 const App = () => {
 
-    const searching = () => {
-        const response = {
-            method: 'get',
-            url: 'https://reddit.com/api/v1/me',
-            // data: {
-            //   firstName: 'Fred',
-            //   lastName: 'Flintstone'
-            // }
-        }
-        axios(response);
-    }
+    //"https://stackoverflow.com/questions/43871637/no-access-control-allow-origin-header-is-present-on-the-requested-resource-whe/43881141#43881141"
+    // proxy solution
+    const proxyurl = "https://cors-anywhere.herokuapp.com/";
 
+    useState(async (username = "mickey wang", password = "123456") => {
+        const testaxios = axios.create({
+            baseURL: 'http://47.91.91.187/GivManage',
+            headers: {
+              'Access-Control-Allow-Origin' : 'http://localhost:3000',
+              'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+              'Access-Control-Allow-Credentials':false,
+              "Access-Control-Allow-Headers": "Content-Type, Authorization",
+              "withCredentials": true
+            }
+        })
+        const url = `/login?account=${username}&password=${password}`; // site that doesn’t send Access-Control-*
+        const logininfo = await testaxios.post(  url, 
+            );
+        console.log("logged in");
+        console.log(logininfo);
 
+    });
 
     const [search, setSearch] = useState('');
 
     useEffect(() => {
-        searching();
+        const searching = async () => {
+            const url = `http://47.91.91.187/GivManage/api/inverter/getInverterInfo?serialNum=${search}`;
+            const inverterdata = await axios.post(proxyurl + url, {
+                
+            });
+            console.log("called inverter data");
+            console.log(inverterdata);
+        };
+        console.log(search);
+        if(search !== "") {
+            searching();
+        };
     }, [search]);
 
     return (
