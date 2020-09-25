@@ -14,17 +14,10 @@ const App = () => {
 
     useState(async (username = "mickey wang", password = "123456") => {
         const testaxios = axios.create({
-            baseURL: 'http://47.91.91.187/GivManage',
-            headers: {
-              'Access-Control-Allow-Origin' : 'http://localhost:3000',
-              'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS',
-              'Access-Control-Allow-Credentials':false,
-              "Access-Control-Allow-Headers": "Content-Type, Authorization",
-              "withCredentials": true
-            }
-        })
+            baseURL: 'http://47.91.91.187/GivManage/api',
+            })
         const url = `/login?account=${username}&password=${password}`; // site that doesn’t send Access-Control-*
-        const logininfo = await testaxios.post(  url, 
+        const logininfo = await testaxios.post(url, 
             );
         console.log("logged in");
         console.log(logininfo);
@@ -36,7 +29,7 @@ const App = () => {
     useEffect(() => {
         const searching = async () => {
             const url = `http://47.91.91.187/GivManage/api/inverter/getInverterInfo?serialNum=${search}`;
-            const inverterdata = await axios.post(proxyurl + url, {
+            const inverterdata = await axios.post( url, {
                 
             });
             console.log("called inverter data");
