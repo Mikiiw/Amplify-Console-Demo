@@ -12,30 +12,44 @@ const App = () => {
     // proxy solution
     const proxyurl = "https://stark-fortress-14740.herokuapp.com/";
 
+   axios.defaults.withCredentials = true;
+   //axios.defaults.exposedHeaders = 'Authorization'
+
     useState(async (username = "mickey wang", password = "123456") => {
 
-        const url = `http://47.91.91.187/GivManage/api/login?account=${username}&password=${password}`;
-        const logininfo = await axios.post(proxyurl + url, {
-            withCredentials: true
-          }
-            );
+    const url = `http://www.givenergy.cloud/GivManage/api/login?account=GivEnergy Training 2&password=123456`;
+        const logininfo = await axios.post( url );
+
         console.log("logged in");
-        console.log(logininfo);
+      console.log(logininfo);
+
+    fetch( proxyurl + url, {
+  method: 'POST',
+  headers: {
+    'Accept': 'application/json',
+    'Content-Type': 'application/json',
+  },
+//   body: JSON.stringify({
+//     // account: 'yourValue',
+//     // password: 'yourOtherValue',
+//   })
+})
 
     });
+
+    
 
     const [search, setSearch] = useState('');
 
     useEffect(() => {
         const searching = async () => {
             const url = `http://47.91.91.187/GivManage/api/inverter/getInverterInfo?serialNum=${search}`;
-            const inverterdata = await axios.post(proxyurl + url, {
-                withCredentials: true
-              });
+            
+            const inverterdata = await axios.post( url);
             console.log("called inverter data");
             console.log(inverterdata);
         };
-        console.log(search);
+        // console.log(search);
         if(search !== "") {
             searching();
         };
