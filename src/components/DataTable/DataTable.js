@@ -4,7 +4,7 @@ const DataTable = () => {
 
 
     return (
-        <table id="example" class="ui celled table">
+        <table id="example" className="ui celled table">
         <thead>
             <tr>
                 <th>Name</th>
