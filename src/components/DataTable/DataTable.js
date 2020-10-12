@@ -1,47 +1,29 @@
 import React, {useState} from 'react';
 
-const DataTable = () => {
-
-
+const DataTable = ({input, input2}) => {
+    
+    if(input == "" || input2 == ""){
+        return null;
+    } else {
     return (
         <table id="example" className="ui celled table">
         <thead>
             <tr>
-                <th>Name</th>
-                <th>Position</th>
-                <th>Office</th>
-                <th>Age</th>
-                <th>Start date</th>
-                <th>Salary</th>
+                <th>Email</th>
+                <th>ID</th>
+                <th>Address</th>
+                <th>Inverter SN</th>
             </tr>
         </thead>
         <tbody>
             <tr>
-                <td>Tiger Nixon</td>
-                <td>System Architect</td>
-                <td>Edinburgh</td>
-                <td>61</td>
-                <td>2011/04/25</td>
-                <td>$320,800</td>
-            </tr>
-            <tr>
-                <td>Michael Bruce</td>
-                <td>Javascript Developer</td>
-                <td>Singapore</td>
-                <td>29</td>
-                <td>2011/06/27</td>
-                <td>$183,000</td>
-            </tr>
-            <tr>
-                <td>Donna Snider</td>
-                <td>Customer Support</td>
-                <td>New York</td>
-                <td>27</td>
-                <td>2011/01/25</td>
-                <td>$112,000</td>
+                <td>{input.email}</td>
+                <td>{input.octopus.id}</td>
+                <td>{input.octopus.home.address}</td>
+                <td>{input2["0"].data.serial}</td>
             </tr>
         </tbody>
-        <tfoot>
+        {/* <tfoot>
             <tr>
                 <th>Name</th>
                 <th>Position</th>
@@ -50,9 +32,10 @@ const DataTable = () => {
                 <th>Start date</th>
                 <th>Salary</th>
             </tr>
-        </tfoot>
+        </tfoot> */}
     </table>
     )
+    }
 }
 
 export default DataTable;
